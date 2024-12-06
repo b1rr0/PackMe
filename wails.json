@@ -1,0 +1,24 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "PackMe",
+  "outputfilename": "PackMe",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "mykytavashchenko",
+    "email": "mykyta.vashchenko@tech-stack.io"
+  },
+  "info": {
+    "fileAssociations": [
+      {
+        "ext": "pm",
+        "name": "PackMe",
+        "description": "PackMe File",
+        "iconName": "appicon",
+        "role": "Editor"
+      }
+    ]
+  }
+}
