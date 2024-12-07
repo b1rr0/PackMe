@@ -1,4 +1,4 @@
-module github.com/b1rr0/PackMe
+module PackMe
 
 go 1.21
 

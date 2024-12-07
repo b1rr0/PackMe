@@ -1,26 +1,38 @@
 import {useState} from 'react';
-import logo from './assets/images/logo-universal.png';
+import pp from './assets/images/pp.png';
 import './App.css';
-import {Greet} from "../wailsjs/go/main/App";
+import {Cmd} from "../wailsjs/go/main/App";
+import { EventsOn } from '../wailsjs/runtime/runtime';
+
+
 
 function App() {
-    const [resultText, setResultText] = useState("Please enter your name below 👇");
-    const [name, setName] = useState('');
-    const updateName = (e: any) => setName(e.target.value);
-    const updateResultText = (result: number) => setResultText(result.toString());
+    const [resultText, setResultText] = useState("");
+    const [countProcessedNodes, setCountProcessedNodes] = useState(0);
+    const [countToProcess, setCountToProcess] = useState(0);
 
-    function greet() {
-        Greet(name).then(updateResultText);
-    }
+    EventsOn('app:directorySelected', (data) => {
+        setResultText(data);
+    });
+
+    EventsOn('app:nodeToProcess', (data) => {
+        setCountToProcess(data+1);
+    });
+    
+    EventsOn('app:nodeProcessed', () => {
+        setCountProcessedNodes(prevCount => prevCount + 1);
+    });
+
+    EventsOn('app:StartProcessing', () => {
+        setResultText("Processing...");
+    });
 
     return (
         <div id="App">
-            <img src={logo} id="logo" alt="logo"/>
+            <img src={pp} id="pp" alt="pp"/>
+            <div id="countProcessedNodes" className="countProcessedNodes">Files Processed: {countProcessedNodes} / Files to Process:{countToProcess}</div>
             <div id="result" className="result">{resultText}</div>
-            <div id="input" className="input-box">
-                <input id="name" className="input" onChange={updateName} autoComplete="off" name="input" type="text"/>
-                <button className="btn" onClick={greet}>Greet</button>
-            </div>
+            {resultText.includes("/") && <button onClick={() => Cmd(resultText)}>Open in Finder</button>}
         </div>
     )
 }
