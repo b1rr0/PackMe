@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import pp from './assets/images/pp.png';
 import './App.css';
-import {Cmd} from "../wailsjs/go/main/App";
+import {Cmd} from "../wailsjs/go/app/App";
 import { EventsOn } from '../wailsjs/runtime/runtime';
 
 
