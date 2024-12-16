@@ -95,7 +95,11 @@ func (node *PackMeNode) Unpack(pathToFile string) {
 		}
 		defer file.Close()
 
-		_, err = decompressToByteArray(node.Data)
+		decompressedData, err := decompressToByteArray(node.Data)
+		if err != nil {
+			fmt.Printf("Error writing file: %v\n", err)
+		}
+		_, err = file.Write(decompressedData)
 		if err != nil {
 			fmt.Printf("Error writing file: %v\n", err)
 		}
