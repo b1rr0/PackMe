@@ -1,13 +1,16 @@
 package pack_me_file_processing
 
 import (
+	"bytes"
 	"context"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
-	compress "PackMe/internal/compress"
 	dir "PackMe/internal/dir-processing"
+
+	flate "compress/flate"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -29,10 +32,40 @@ func NewPackMeNode(ctx context.Context, node *dir.Node) *PackMeNode {
 		}
 	} else {
 		runtime.EventsEmit(ctx, "app:nodeProcessed", node.Name)
-
-		packMeNode.Data = compress.Compress(node.Data.([]byte))
+		packMeNode.Data, _ = compressToByteArray(node.Data.([]byte))
 	}
 	return packMeNode
+}
+
+func compressToByteArray(data []byte) ([]byte, error) {
+	var buffer bytes.Buffer
+
+	writer, err := flate.NewWriter(&buffer, flate.BestCompression)
+	if err != nil {
+		return nil, err
+	}
+	_, err = writer.Write(data)
+	if err != nil {
+		writer.Close()
+		return nil, err
+	}
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
+	return buffer.Bytes(), nil
+}
+
+func decompressToByteArray(compressedData []byte) ([]byte, error) {
+	reader := flate.NewReader(bytes.NewReader(compressedData))
+	defer reader.Close()
+
+	uncompressedData, err := io.ReadAll(reader)
+	if err != nil {
+		return nil, err
+	}
+
+	return uncompressedData, nil
 }
 
 func (node *PackMeNode) PrintNode() {
@@ -62,7 +95,7 @@ func (node *PackMeNode) Unpack(pathToFile string) {
 		}
 		defer file.Close()
 
-		_, err = file.Write(node.Data)
+		_, err = decompressToByteArray(node.Data)
 		if err != nil {
 			fmt.Printf("Error writing file: %v\n", err)
 		}
