@@ -1,19 +1,39 @@
-# README
+# PacMe
 
-## About
+**PacMe** is a custom file archiver that compresses files into the `.PackMe` format.
+![Микита](https://github.com/user-attachments/assets/2c42fd09-3e9e-4333-9158-563152f9fe9e)
 
-This is the official Wails React-TS template.
+## Overview
 
-You can configure the project by editing `wails.json`. More information about the project settings can be found
-here: https://wails.io/docs/reference/project-config
+PacMe was developed as a demonstration of custom file compression techniques. It combines well-known algorithms to create an efficient and compact archiving tool.
 
-## Live Development
+This project was also used to illustrate the concept of **trees**, specifically **Huffman trees**, in the context of data compression.
 
-To run in live development mode, run `wails dev` in the project directory. This will run a Vite development
-server that will provide very fast hot reload of your frontend changes. If you want to develop in a browser
-and have access to your Go methods, there is also a dev server that runs on http://localhost:34115. Connect
-to this in your browser, and you can call your Go code from devtools.
+## Features
 
-## Building
+- Compresses files into a custom `.PackMe` format  
+- Uses **Huffman coding** for entropy-based compression  
+- Applies the **Z-function** for pattern detection and optimization  
+- Supports both compression and decompression  
 
-To build a redistributable, production mode package, use `wails build`.
+## Technologies
+
+- Programming Language: **Go**  
+- Framework: [Wails](https://wails.io)  
+- Algorithms: Huffman coding (binary trees), Z-function  
+
+## Usage
+
+PacMe is intended for:
+
+- Educational purposes  
+- Demonstrating compression algorithm concepts  
+- Studying **Huffman trees** and other data structures  
+- Experimenting with file archiving and format creation  
+
+## Development
+
+To run the project in development mode:
+
+```bash
+wails dev
