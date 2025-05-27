@@ -22,6 +22,13 @@ This project was also used to illustrate the concept of **trees**, specifically 
 - Framework: [Wails](https://wails.io)  
 - Algorithms: Huffman coding (binary trees), Z-function  
 
+## Java Implementation
+
+A reference Java implementation of Huffman coding:  
+👉 [Hafman.java (GitHub)](https://github.com/b1rr0/Olimp/blob/master/src/study/algo/hafman/Hafman.java)
+
+This implementation helped in testing and understanding the Huffman algorithm before integrating it into the Go version.
+
 ## Usage
 
 PacMe is intended for:
