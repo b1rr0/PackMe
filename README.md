@@ -25,9 +25,7 @@ This project was also used to illustrate the concept of **trees**, specifically 
 ## Java Implementation
 
 A reference my Java implementation of Huffman coding:  
-👉 [Hafman.java (GitHub)][https://github.com/b1rr0/Olimp/tree/master/src/study/algo/hafman]
-
-This implementation helped in testing and understanding the Huffman algorithm before integrating it into the Go version.
+👉 [Hafman.java (GitHub)] https://github.com/b1rr0/Olimp/tree/master/src/study/algo/hafman
 
 ## Usage
 
